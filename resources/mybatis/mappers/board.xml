@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="board">
+	<select id="selectCount" resultType="long" parameterType="map">
+		<![CDATA[
+		SELECT count(*) 
+		FROM board 
+		]]>
+		<if test="searchKeyword != ''">
+			<![CDATA[
+			where(title like '%${keyword}%' or content like '%${keyword}%') 
+			]]>
+		</if>
+	</select>
+	
+	<select id="selectPageList" parameterType="map" resultType="BoardVo">
+		<![CDATA[
+		SELECT * 
+		FROM (	SELECT rownum as rnum, C.* 
+				FROM (	SELECT B.no, B.title, B.member_no as memberNo, M.name as memberName, B.view_cnt as viewCount, to_char( B.reg_date, 'yyyy-mm-dd hh:mi:ss' ) as regDate 
+						FROM board B, member M 
+						WHERE B.member_no = M.no 
+		]]>
+		<if test="searchKeyword != ''">
+			<![CDATA[
+						AND (B.title LIKE '%${keyword}%' OR B.content LIKE '%${keyword}%') 
+			]]>
+		</if>
+		<![CDATA[
+						ORDER BY reg_date DESC) C)
+		WHERE(#{page} - 1) * #{listSize} + 1 <= rnum AND rnum <= #{page} * #{listSize}
+		]]>	
+	</select>
+	
+	<select id="selectByNo" parameterType="long" resultType="BoardVo">
+		<![CDATA[
+		SELECT no, title, content, member_no as memberNo 
+		FROM board 
+		WHERE no = #{no}
+		]]>
+	</select>
+	
+	<update id="increaseViewCount" parameterType="long">
+		<![CDATA[
+		UPDATE MEMBER 
+		SET view_cnt = view_cnt+1 
+		WHERE no = #{no}
+		]]>
+	</update>
+
+	<insert id="insert" parameterType="BoardVo">
+		<![CDATA[
+		INSERT INTO board 
+		VALUES(board_no_seq.nextval, #{title}, #{content}, #{memberNo}, 0, SYSDATE)
+		]]>
+	</insert>
+	
+	<update id="update" parameterType="BoardVo">
+		<![CDATA[
+		UPDATE board 
+		SET title = #{title}, content = #{content} 
+		WHERE no = #{no} and member_no = #{memberNo} 
+		]]>
+	</update>
+	
+	<insert id="delete" parameterType="map">
+		<![CDATA[
+		delete from board 
+		where no=#{no} and member_no=#{memberNo}
+		]]>
+	</insert>
+</mapper>
