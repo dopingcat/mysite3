@@ -2,8 +2,6 @@ package com.hanains.mysite.controller;
 
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.hanains.mysite.annotation.Auth;
+import com.hanains.mysite.annotation.AuthUser;
 import com.hanains.mysite.service.BoardService;
 import com.hanains.mysite.vo.BoardVo;
 import com.hanains.mysite.vo.UserVo;
@@ -39,56 +39,49 @@ public class BoardController {
 		return "/board/view";
 	}
 	
+	@Auth
 	@RequestMapping("/modify/{no}")
-	public String modify(HttpSession session, @PathVariable("no") Long no, Model model) {
-		UserVo authUser = (UserVo)session.getAttribute("authUser");
-		if(authUser == null) {
-			return "redirect:/user/loginform";
-		}
+	public String modify(@PathVariable("no") Long no, Model model) {
 		BoardVo vo = boardService.viewContent(no);
 		model.addAttribute("vo", vo);
 		return "/board/modify";
 	}
 	
+	@Auth
 	@RequestMapping("/write")
-	public String write(HttpSession session) {
-		UserVo authUser = (UserVo)session.getAttribute("authUser");
-		if(authUser == null) {
-			return "redirect:/user/loginform";
-		}
+	public String write() {
 		return "/board/write";
 	}
 	
+	@Auth
+	@RequestMapping("/reply/{no}")
+	public String reply(@PathVariable("no") Long no, Model model) {
+		BoardVo vo = boardService.viewContent(no);
+		System.out.println("reply : " + vo);
+		model.addAttribute("vo", vo);
+		return "/board/write";
+	}
+	
+	@Auth
 	@RequestMapping("/insert")
-	public String insert(HttpSession session, @ModelAttribute BoardVo vo) {
-		UserVo authUser = (UserVo)session.getAttribute("authUser");
-		if( authUser == null ) {
-			return "redirect:/user/loginform";
-		}
+	public String insert(@AuthUser UserVo authUser, @ModelAttribute BoardVo vo) {
 		vo.setMemberNo(authUser.getNo());
 		boardService.writeBoard(vo);
-		
 		return "redirect:/board";
 	}
 	
+	@Auth
 	@RequestMapping("/update")
-	public String update(HttpSession session, @ModelAttribute BoardVo vo) {
-		UserVo authUser = (UserVo)session.getAttribute("authUser");
-		if(authUser == null) {
-			return "redirect:/user/loginform";
-		}
+	public String update(@AuthUser UserVo authUser, @ModelAttribute BoardVo vo) {
 		vo.setMemberNo(authUser.getNo());
 		boardService.updateBoard(vo);
 		
 		return "redirect:/board";
 	}
 	
+	@Auth
 	@RequestMapping("/delete/{no}")
-	public String delete(HttpSession session, @PathVariable("no") Long no) {
-		UserVo authUser = (UserVo)session.getAttribute("authUser");
-		if(authUser == null) {
-			return "redirect:/user/loginform";
-		}
+	public String delete(@AuthUser UserVo authUser, @PathVariable("no") Long no) {
 		boardService.deleteBoard(no, authUser.getNo());
 		
 		return "redirect:/board";

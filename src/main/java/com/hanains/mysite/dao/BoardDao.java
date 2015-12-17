@@ -45,15 +45,17 @@ public class BoardDao {
 	}
 	
 	public void increaseViewCount(Long no) {
-		
+		sqlSession.update("board.updateViewCount", no);
 	}
 	
 	public void insert(BoardVo vo) {
+		if(vo.getGroupNo() != null) { // 답글인 경우 해당 그룹의 하위 order_no +1
+			sqlSession.update("board.updateOrderNo", vo);
+		}
 		sqlSession.insert("board.insert", vo);
 	}
 
 	public void update(BoardVo vo) {
-		System.out.println(vo);
 		sqlSession.update("board.update", vo);
 	}
 

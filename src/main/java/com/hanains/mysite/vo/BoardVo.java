@@ -8,13 +8,16 @@ public class BoardVo {
 	private String memberName;
 	private Long viewCount;
 	private String regDate;
+	private Long groupNo;
+	private Long orderNo;
+	private Long depth;
 	
 	public BoardVo() {
 		super();
 	}
 
 	public BoardVo(Long no, String title, String content, Long memberNo, String memberName, Long viewCount,
-			String regDate) {
+			String regDate, Long groupNo, Long orderNo, Long depth) {
 		super();
 		this.no = no;
 		this.title = title;
@@ -23,6 +26,9 @@ public class BoardVo {
 		this.memberName = memberName;
 		this.viewCount = viewCount;
 		this.regDate = regDate;
+		this.groupNo = groupNo;
+		this.orderNo = orderNo;
+		this.depth = depth;
 	}
 
 	public Long getNo() {
@@ -65,11 +71,11 @@ public class BoardVo {
 		this.memberName = memberName;
 	}
 
-	public Long getviewCount() {
+	public Long getViewCount() {
 		return viewCount;
 	}
 
-	public void setviewCount(Long viewCount) {
+	public void setViewCount(Long viewCount) {
 		this.viewCount = viewCount;
 	}
 
@@ -79,6 +85,30 @@ public class BoardVo {
 
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;
+	}
+
+	public Long getGroupNo() {
+		return groupNo;
+	}
+
+	public void setGroupNo(Long groupNo) {
+		this.groupNo = groupNo;
+	}
+
+	public Long getOrderNo() {
+		return orderNo;
+	}
+
+	public void setOrderNo(Long orderNo) {
+		this.orderNo = orderNo;
+	}
+
+	public Long getDepth() {
+		return depth;
+	}
+
+	public void setDepth(Long depth) {
+		this.depth = depth;
 	}
 
 	@Override
@@ -98,7 +128,14 @@ public class BoardVo {
 		builder.append(viewCount);
 		builder.append(", regDate=");
 		builder.append(regDate);
+		builder.append(", groupNo=");
+		builder.append(groupNo);
+		builder.append(", orderNo=");
+		builder.append(orderNo);
+		builder.append(", depth=");
+		builder.append(depth);
 		builder.append("]");
 		return builder.toString();
 	}
+
 }

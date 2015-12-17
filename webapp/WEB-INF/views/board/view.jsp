@@ -26,8 +26,20 @@
 						<td class="label">내용</td>
 						<td>
 							<div class="view-content">
-							<% pageContext.setAttribute("cn", "\n"); %>
-							${fn:replace(vo.content, cn, "<br/>")}
+								<% pageContext.setAttribute("cn", "\n"); %>
+								${fn:replace(vo.content, cn, "<br/>")}
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="label">첨부 파일</td>
+						<td>
+							<!-- 파일이 있으면 리스트 뿌리기 -->
+							<div align="right">
+								<form method="post" action="${pageContext.request.contextPath }/upload" enctype="multipart/form-data">
+									<input type="file" name="uploadFile">
+									<input type="submit" value="upload">
+								</form>
 							</div>
 						</td>
 					</tr>
@@ -38,6 +50,9 @@
 						<a href="${pageContext.request.contextPath}/board/modify/${vo.no}">글수정</a>
 					</c:if>
 					
+					<c:if test="${(not empty authUser) && (vo.memberNo ne authUser.no)}" >
+						<a href="${pageContext.request.contextPath}/board/reply/${vo.no}">답글</a>
+					</c:if>
 				</div>
 			</div>
 		</div>

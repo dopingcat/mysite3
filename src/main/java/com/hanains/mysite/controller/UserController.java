@@ -1,7 +1,5 @@
 package com.hanains.mysite.controller;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -36,23 +34,4 @@ public class UserController {
 	public String loginform(){
 		return "/user/loginform";
 	}
-
-	@RequestMapping("/login")
-	public String login(HttpSession session, @ModelAttribute UserVo vo) {
-		UserVo authUser = userService.login(vo);
-		if(authUser == null) {
-			return "redirect:/user/loginform";
-		}
-		
-		session.setAttribute("authUser", authUser);
-		return "redirect:/";
-	}
-
-	@RequestMapping("/logout")
-	public String logout(HttpSession session) {
-		session.removeAttribute("authUser");
-		session.invalidate();
-		
-		return "redirect:/";
-	}	
 }

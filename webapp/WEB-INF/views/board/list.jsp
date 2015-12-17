@@ -30,7 +30,12 @@
 					<c:forEach items="${boardData.list}" var="vo" varStatus="stat">
 						<tr>
 							<td>${vo.no}</td>
-							<td><a href="${pageContext.request.contextPath}/board/view/${vo.no}">${vo.title}</a></td>
+							<td class="title">
+								<c:if test="${vo.depth > 0 }">
+									<img src="${pageContext.request.contextPath }/assets/images/ico-reply.gif">
+								</c:if>
+								<a href="${pageContext.request.contextPath}/board/view/${vo.no}">${vo.title}</a>
+							</td>
 							<td>${vo.memberName}</td>
 							<td>${vo.viewCount}</td>
 							<td>${vo.regDate}</td>
