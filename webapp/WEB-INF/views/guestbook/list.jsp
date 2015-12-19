@@ -16,7 +16,7 @@
 			<div id="guestbook">
 				<c:choose>
 					<c:when test="${not empty authUser}">
-						<form action="${pageContext.request.contextPath}/guestbook/insert" method="post">
+						<form action="${pageContext.request.contextPath}/guestbook/write" method="post">
 							<table>
 								<tr>
 									<td align="center">이름</td>
