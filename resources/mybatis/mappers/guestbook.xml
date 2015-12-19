@@ -32,7 +32,7 @@
 		<selectKey keyProperty="no" resultType="long" order="BEFORE">
 		select guestbook_seq.nextval from dual
 		</selectKey>
-		insert into member 
+		insert into guestbook 
 		values(#{no}, #{name}, #{password}, #{message}, SYSDATE)
 	</insert>
 	
@@ -45,7 +45,7 @@
 	
 	<update id="update" parameterType="GuestbookVo">
 		<![CDATA[
-		update member 
+		update guestbook 
 		set name = #{name}, 
 		]]>
 		<if test="password != ''">
@@ -54,8 +54,8 @@
 			]]>
 		</if>
 		<![CDATA[
-			gender = #{gender } 
-			where no = #{no } 
+			gender = #{gender} 
+			where no = #{no} 
 		]]>
 	</update>
 </mapper>
