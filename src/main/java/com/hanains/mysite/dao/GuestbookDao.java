@@ -14,7 +14,11 @@ public class GuestbookDao {
 	private SqlSession sqlSession;
 	
 	public List<GuestbookVo> getList() {
-		return sqlSession.selectList("guestbook.selectAll");
+		
+		List<GuestbookVo> list = sqlSession.selectList("guestbook.selectAll");
+		
+		return list;
+		
 	}
 	
 	public List<GuestbookVo> getPageList(Long pageNum) {
