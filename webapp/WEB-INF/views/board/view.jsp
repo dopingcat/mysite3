@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,7 +36,7 @@
 						<td>
 							<!-- 파일이 있으면 리스트 뿌리기 -->
 							<div align="right">
-								<form method="post" action="${pageContext.request.contextPath }/upload" enctype="multipart/form-data">
+								<form method="post" action="${pageContext.request.contextPath}/upload" enctype="multipart/form-data">
 									<input type="file" name="uploadFile">
 									<input type="submit" value="upload">
 								</form>
