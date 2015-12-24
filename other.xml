@@ -67,4 +67,8 @@
       <option name="ENABLED" value="true" />
     </filter>
   </component>
+  <component name="ExternalResourceManagerImpl">
+    <resource url="http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring/ehcache-spring-1.1.xsd" location="$USER_HOME$/Library/Caches/IntelliJIdea15/extResources/eadb2273_ehcache-spring-1.1.xsd" />
+    <resource url="http://www.springframework.org/schema/tool/spring-tool-2.5.xsd" location="$USER_HOME$/Library/Caches/IntelliJIdea15/extResources/2aba23e5_spring-tool-2.5.xsd" />
+  </component>
 </application>
