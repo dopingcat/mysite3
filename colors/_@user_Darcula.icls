@@ -1,0 +1,13 @@
+<scheme name="_@user_Darcula" version="142" parent_scheme="Darcula">
+  <metaInfo>
+    <property name="created">2017-09-13T19:26:46</property>
+    <property name="ide">idea</property>
+    <property name="ideVersion">2016.3.3.0.0</property>
+    <property name="modified">2017-09-13T19:27:42</property>
+    <property name="originalScheme">Darcula</property>
+  </metaInfo>
+  <option name="EDITOR_FONT_SIZE" value="10" />
+  <option name="CONSOLE_FONT_NAME" value="Menlo" />
+  <option name="CONSOLE_FONT_SIZE" value="12" />
+  <option name="EDITOR_FONT_NAME" value="D2Coding" />
+</scheme>
