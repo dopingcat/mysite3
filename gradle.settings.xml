@@ -1,0 +1,5 @@
+<application>
+  <component name="GradleSystemSettings">
+    <option name="gradleVmOptions" value="-Dfile.encoding=UTF-8 -Xmx512m -XX:PermSize=64m -XX:MaxPermSize=256m" />
+  </component>
+</application>
